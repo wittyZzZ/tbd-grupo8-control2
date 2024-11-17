@@ -1,53 +1,63 @@
 <template>
-  <v-container class="homework-container" fluid>
-    <v-row justify="center">
-      <v-card class="text-center pa-6" elevation="8" max-width="400">
-        <v-card-title class="text-h5">Tareas</v-card-title>
-        <v-divider class="my-4"></v-divider>
+  <v-container class="homework-container" fluid style="padding-top: 80px;">
+    <v-col justify="space-between" align="center" class="mb-12">
 
-        <!-- Botón para agregar una tarea -->
-        <v-btn color="primary" class="mb-4" @click="addTask">
-          Agregar Tarea
-        </v-btn>
+    <v-row justify="center" class="mb-4">
+      <v-col cols="12" sm="6" md="4">
+        <v-btn color="primary" @click="addTask" block>Agregar</v-btn>
+      </v-col>
+    </v-row>
 
+    <v-row justify="center" class="mb-4">
+      <v-col cols="12" sm="6" md="4">
         <v-text-field
           v-model="search"
           label="Buscar tareas"
-          class="mb-4"
           outlined
-        />
+          dense
+          block
+        ></v-text-field>
+      </v-col>
+    </v-row>
 
+    <v-row justify="center" class="mb-4">
+    <v-col cols="12" sm="6" md="4" class="mb-3">
         <v-select
           v-model="filterStatus"
           :items="statusOptions"
+          item-text="text"
+          item-value="value"
           label="Filtrar por estado"
-          class="mb-4"
           outlined
-        />
-
-        <v-data-table
-          :headers="headers"
-          :items="filteredTasks"
-          class="elevation-1"
-          item-value="id_tarea"
           dense
-          search="search"
+          
+        ></v-select>
+    </v-col>
+  </v-row>
+  </v-col>
+
+  <!-- Tabla -->
+  <v-row justify="center">
+    <v-data-table
+      :headers="headers"
+      :items="filteredTasks"
+      class="elevation-1"
+      item-value="id_tarea"
+      dense
+    >
+      <template v-slot:[`item.actions`]="{ item }">
+        <v-chip
+          :color="item.estado ? 'green' : 'orange'"
+          text-color="white"
         >
-          <template v-slot:[`item.actions`]="{ item }">
-            <v-chip
-              :color="item.estado ? 'green' : 'orange'"
-              text-color="white"
-            >
-              {{ item.estado ? "Completada" : "Pendiente" }}
-            </v-chip>
-            <!-- Botón para editar la tarea -->
-            <v-btn icon @click="editTask(item)">
-              <v-icon>mdi-pencil</v-icon>
-            </v-btn>
-          </template>
-        </v-data-table>
-      </v-card>
-    </v-row>
+          {{ item.estado ? "Completada" : "Pendiente" }}
+        </v-chip>
+        <v-btn icon @click="editTask(item)">
+          <v-icon>mdi-pencil</v-icon>
+        </v-btn>
+      </template>
+    </v-data-table>
+  </v-row>
   </v-container>
 </template>
 
