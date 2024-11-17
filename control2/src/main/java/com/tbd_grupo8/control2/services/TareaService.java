@@ -47,4 +47,9 @@ public class TareaService {
     public List<Tarea> getTareasByUsuario(Long id_usuario) {
         return tareaRepository.getTareasByUsuario(id_usuario);
     }
+
+    // Calcular el tiempo restante de una tarea
+    public int getTiempoRestante(Long id) {
+        return tareaRepository.getTiempoRestante(id);
+    }
 }

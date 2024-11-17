@@ -61,4 +61,10 @@ public class TareaController {
     public List<Tarea> getTareasByUsuario(@PathVariable Long id_usuario) {
         return tareaService.getTareasByUsuario(id_usuario);
     }
+
+    // Calcular el tiempo restante de una tarea
+    @GetMapping("/{id}/tiempo_restante")
+    public int getTiempoRestante(@PathVariable Long id) {
+        return tareaService.getTiempoRestante(id);
+    }
 }

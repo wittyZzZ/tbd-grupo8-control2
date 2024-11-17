@@ -99,4 +99,15 @@ public class TareaRepository {
             return null;
         }
     }
+
+    public int getTiempoRestante(Long id) {
+        String sql = "SELECT (fecha_termino - CURRENT_DATE) AS tiempo_restante FROM tarea WHERE id_tarea = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, Integer.class, id);
+        } catch (DataAccessException e) {
+            System.out.println("Error al obtener tiempo restante de tarea con id " + id + ": " + e.getMessage());
+            return 0;
+        }
+    }
+
 }
