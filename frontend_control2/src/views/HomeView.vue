@@ -8,25 +8,9 @@
 
         <v-divider class="my-4"></v-divider>
 
-        <v-card-text>
-          <!-- Botón de Login -->
-          <v-btn @click="logout" color="primary" class="ma-2" :to="{ name: 'Login' }" block>
-            LOGIN
-          </v-btn>
-
-          <!-- Botón de Register -->
-          <v-btn @click="logout" color="secondary" class="ma-2" :to="{ name: 'Register' }" block>
-            REGISTER
-          </v-btn>
-        </v-card-text>
+        
 
       </v-card>
-
-      <!-- <v-col cols="4" class="bg-purple text-center">
-        <v-btn color="primary" :to="{ name: 'Products' }">
-          LINK A PRODUCTOS
-        </v-btn>
-      </v-col> -->
 
     </v-row>
   </v-container>
@@ -34,14 +18,13 @@
 
 
 <script>
-import { defineComponent } from 'vue';
 
 // Components
 
-export default defineComponent({
+export default{
   name: 'HomeView',
 
   components: {
   },
-});
+};
 </script>
