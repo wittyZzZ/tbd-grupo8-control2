@@ -28,6 +28,13 @@ public class UsuarioController {
         return usuario != null ? ResponseEntity.ok(usuario) : ResponseEntity.notFound().build();
     }
 
+    // Obtener un usuario por su Username
+    @GetMapping("/{username}")
+    public ResponseEntity<Usuario> getUsuarioByUsername(@PathVariable String username) {
+        Usuario usuario = usuarioService.getUsuarioByUsername(username);
+        return usuario != null ? ResponseEntity.ok(usuario) : ResponseEntity.notFound().build();
+    }
+
     // Crear un nuevo usuario
     @PostMapping
     public ResponseEntity<Void> createUsuario(@RequestBody Usuario usuario) {

@@ -1,37 +1,49 @@
 <template>
-  <v-container class="homework-container" fluid>
-    <v-row justify="center">
-      <v-card class="text-center pa-6" elevation="8" max-width="400">
-        <v-card-title class="text-h5">Tareas</v-card-title>
-        <v-divider class="my-4"></v-divider>
+  <v-container class="homework-container" fluid style="padding-top: 80px;">
+    <v-col justify="space-between" align="center" class="mb-12">
 
         <!-- Botón para agregar una tarea -->
-        <v-btn color="primary" class="mb-4" @click="addTask">
-          Agregar Tarea
-        </v-btn>
+      <v-row justify="center" class="mb-4">
+        <v-col cols="12" sm="6" md="4">
+          <v-btn color="primary" @click="addTask" block>Agregar Tarea</v-btn>
+        </v-col>
+      </v-row>
+      <v-row justify="center" class="mb-4">
+        <v-col cols="12" sm="6" md="4">
+          <v-text-field
+            v-model="search"
+            label="Buscar tareas"
+            outlined
+            @input="applyFilters"
+            dense
+            block
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row justify="center" class="mb-4">
+        <v-col cols="12" sm="6" md="4" class="mb-3">
+          <v-select
+            v-model="filterStatus"
+            :items="statusOptions.map(option => option.text)"
+            item-text="text"
+            item-value="value"
+            label="Filtrar por estado"
+            class="mb-4"
+            outlined
+            @change="applyFilters"
+          ></v-select>
+        </v-col>
+      </v-row>
+    </v-col>
 
-        <v-text-field
-          v-model="search"
-          label="Buscar tareas"
-          class="mb-4"
-          outlined
-        />
-
-        <v-select
-          v-model="filterStatus"
-          :items="statusOptions"
-          label="Filtrar por estado"
-          class="mb-4"
-          outlined
-        />
-
+     <!-- Tabla -->
+    <v-row justify="center">
         <v-data-table
           :headers="headers"
-          :items="filteredTasks"
+          :items="filteredTasks ? filteredTasks : tasks"
           class="elevation-1"
           item-value="id_tarea"
           dense
-          search="search"
         >
           <template v-slot:[`item.actions`]="{ item }">
             <v-chip
@@ -40,14 +52,12 @@
             >
               {{ item.estado ? "Completada" : "Pendiente" }}
             </v-chip>
-            <!-- Botón para editar la tarea -->
             <v-btn icon @click="editTask(item)">
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
           </template>
         </v-data-table>
-      </v-card>
-    </v-row>
+      </v-row>
   </v-container>
 </template>
 
@@ -61,18 +71,18 @@ export default {
     return {
       user: "",
       tasks: [], // Lista de tareas obtenidas del servicio
+      filteredTasks : [],
       search: "", // Palabra clave para buscar
       filterStatus: null, // Filtro de estado: 'pendiente' o 'completada'
       statusOptions: [
-        { text: "Pendiente", value: false },
-        { text: "Completada", value: true },
+        { "text": "Pendiente", "value": false },
+        { "text": "Completada", "value": true }
       ],
       headers: [
         { text: "Título", value: "titulo" },
         { text: "Descripción", value: "descripcion" },
         { text: "Fecha Creación", value: "fecha_creacion" },
         { text: "Fecha Término", value: "fecha_termino" },
-        { text: "Estado", value: "estado" },
         //esto es para mostrar los botones
         { text: "Acciones", value: "actions", sortable: false },
       ],
@@ -80,8 +90,8 @@ export default {
   },
 
   computed: {
-    filteredTasks() {
-      return this.tasks
+    applyFilters() {
+      this.filteredTasks = this.tasks
         .filter((task) => {
           // Filtrar por estado si está seleccionado
           if (this.filterStatus !== null) {
@@ -101,24 +111,24 @@ export default {
   },
 
   mounted() {
-    // Obtiene todas las tareas al montar el componente
-    taskService
-      .getAll()
-      .then((response) => {
-        this.tasks = response.data; // Ajusta esto según el formato de datos que retorna tu servicio
-        console.log(this.tasks);
-      })
-      .catch((error) => {
-        console.error("Error al obtener las tareas:", error);
-      });
-    
-
 
     const token = localStorage.getItem("token");
     if (token) {
       const decodedToken = jwtDecode(token);
       this.user = decodedToken;
     }
+    // Obtiene todas las tareas del usuario al montar el componente
+    taskService
+      .getByUserId(this.user.id_usuario)
+      .then((response) => {
+        this.tasks = response.data; // Ajusta esto según el formato de datos que retorna tu servicio
+        console.log(this.tasks);
+      })
+      .catch((error) => {
+        console.error("Error al obtener las tareas:", error);
+
+      });
+    
   },
 
   methods: {

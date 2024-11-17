@@ -3,7 +3,7 @@ import { Stomp } from "@stomp/stompjs";
 
 export default {
   install(app) {
-    const socket = new SockJS("http://localhost:8081/ws");
+    const socket = new SockJS("http://localhost:8080/ws", null, {withCredentials: true,});
     const stompClient = Stomp.over(socket);
 
     stompClient.connect({}, () => {
