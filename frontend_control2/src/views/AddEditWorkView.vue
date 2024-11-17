@@ -66,6 +66,7 @@
 
 <script>
 import taskService from '@/services/task.service';
+import { jwtDecode } from "jwt-decode";
 export default {
     name: "AddEditWorkView",
     data() {
@@ -79,10 +80,20 @@ export default {
         },
         isEditing: false, // Determina si estamos editando o creando
         loading: false,
+        userId: null,
       };
     },
   
   mounted() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      this.userId = decodedToken.id_usuario; // Almacena el ID del usuario logueado
+      console.log("ID del usuario logueado:", this.userId);
+    } else {
+      console.error("No se encontró el token.");
+    }
+
     const tareaId = this.$route.query.id; // Obtenemos el ID de la tarea (si existe)
     if (tareaId) {
       this.isEditing = true;
@@ -122,8 +133,12 @@ export default {
             });
         } else {
           // Crear tarea
+          const newTask = {
+          ...this.tarea,
+          id_usuario: this.userId, // Agrega el ID del usuario logueado
+        };
           taskService
-            .create(this.tarea)
+            .create(newTask)
             .then(() => {
               this.$router.push({ path: '/homeworks' }); // Redirigir a la lista de tareas
             })

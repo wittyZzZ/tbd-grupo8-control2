@@ -111,8 +111,28 @@ export default {
   },
 
   mounted() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      this.user = decodedToken; // Almacena los datos del usuario logueado
+      const userId = this.user.id_usuario; // Obtén el ID del usuario
+
+      // Llama al servicio para obtener las tareas del usuario
+      taskService
+        .getTasksByUserId(userId)
+        .then((response) => {
+          this.tasks = response.data; // Almacena las tareas obtenidas
+          console.log("Tareas del usuario:", this.tasks);
+        })
+        .catch((error) => {
+          console.error("Error al obtener las tareas del usuario:", error);
+        });
+    } else {
+      console.error("No se encontró el token de autenticación.");
+    }
+  },
     // Obtiene todas las tareas al montar el componente
-    taskService
+    /* taskService
       .getAll()
       .then((response) => {
         this.tasks = response.data; // Ajusta esto según el formato de datos que retorna tu servicio
@@ -129,7 +149,7 @@ export default {
       const decodedToken = jwtDecode(token);
       this.user = decodedToken;
     }
-  },
+  }, */
 
   methods: {
     addTask() {
