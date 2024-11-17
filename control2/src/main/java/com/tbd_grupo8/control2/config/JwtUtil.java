@@ -3,6 +3,7 @@ package com.tbd_grupo8.control2.config;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.tbd_grupo8.control2.entities.Usuario;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Date;
@@ -17,14 +18,18 @@ public class JwtUtil {
     private static Algorithm ALGORITHM = Algorithm.HMAC256(SECRET);
 
     // Este método crea un JWT con el nombre de usuario
-    public String create(String username) {
+    public String create(Usuario usuario) {
         return JWT.create()
-                .withSubject(username)
+                .withSubject(usuario.getUsername())
+                .withClaim("id_usuario", usuario.getId_usuario())
+                .withClaim("username", usuario.getUsername())
+                .withClaim("direccion", usuario.getDireccion())
+                .withClaim("email", usuario.getEmail())
+                .withClaim("telefono", usuario.getTelefono())
                 .withIssuer("tbdgrupo8")
                 .withIssuedAt(new Date())
-                .withExpiresAt(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5)) // Modifica este valor para cambiar la duración del token
-                ).sign(ALGORITHM);
-
+                .withExpiresAt(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5)))
+                .sign(ALGORITHM);
     }
 
     // Este método verifica si un JWT es válido

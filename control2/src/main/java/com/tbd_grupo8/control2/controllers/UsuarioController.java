@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/api/usuario")
 public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
 
     // Obtener todos los usuarios
-    @GetMapping
+    @GetMapping("/")
     public List<Usuario> getAllUsuarios() {
         return usuarioService.getAllUsuarios();
     }

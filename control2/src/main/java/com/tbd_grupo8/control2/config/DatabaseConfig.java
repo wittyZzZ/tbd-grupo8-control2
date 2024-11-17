@@ -13,7 +13,7 @@ public class DatabaseConfig {
     @Value("${spring.datasource.username}")
     private String dbUsername;
 
-    @Value("${spring.datasource.password}")
+    @Value("postgres")
     private String dbPassword;
 
     @Bean

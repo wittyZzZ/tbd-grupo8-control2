@@ -16,7 +16,7 @@ public class TareaController {
     private TareaService tareaService;
 
     // Obtener todas las tareas
-    @GetMapping
+    @GetMapping("/")
     public List<Tarea> getAllTareas() {
         return tareaService.getAllTareas();
     }

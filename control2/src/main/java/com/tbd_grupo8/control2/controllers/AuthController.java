@@ -41,8 +41,9 @@ public class AuthController {
             UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
             Authentication authentication = authenticationManager.authenticate(login);
 
-            // Si la autenticación fue exitosa, crear un JWT y devolverlo en el header
-            String jwt = this.jwtUtil.create(loginDto.getUsername());
+            // Obtener el usuario y crear el token con toda su información
+            Usuario usuario = usuarioService.getUsuarioByUsername(loginDto.getUsername());
+            String jwt = this.jwtUtil.create(usuario); // Modificamos el método `create` para recibir un objeto Cliente
 
             return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION,jwt).build();
         } catch (BadCredentialsException e) {
