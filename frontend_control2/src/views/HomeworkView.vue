@@ -18,21 +18,26 @@
           outlined
         />
 
+        <v-select
+          v-model="filterStatus"
+          :items="statusOptions"
+          label="Filtrar por estado"
+          class="mb-4"
+          outlined
+        />
+
         <v-data-table
           :headers="headers"
-          :items="tasks"
+          :items="filteredTasks"
           class="elevation-1"
           item-value="id"
           dense
           search="search"
         >
           <template v-slot:[`item.actions`]="{ item }">
-            <!-- <v-chip color="green" text-color="white" v-if="item.status === 'Completada'">
-              {{ item.status }}
+            <v-chip :color="item.estado ? 'green' : 'orange'" text-color="white">
+              {{ item.estado ? "Completada" : "Pendiente" }}
             </v-chip>
-            <v-chip color="orange" text-color="white" v-else>
-              {{ item.status }}
-            </v-chip> -->
             <!-- Botón para editar la tarea -->
             <v-btn icon @click="editTask(item)">
               <v-icon>mdi-pencil</v-icon>
@@ -54,6 +59,12 @@
     data() {
       return {
         tasks: [], // Lista de tareas obtenidas del servicio
+        search: "", // Palabra clave para buscar
+        filterStatus: null, // Filtro de estado: 'pendiente' o 'completada'
+        statusOptions: [
+          { text: "Pendiente", value: false },
+          { text: "Completada", value: true },
+        ],
         headers: [
         { text: "Título", value: "titulo" },
         { text: "Descripción", value: "descripcion" },
@@ -64,6 +75,27 @@
         { text: "Acciones", value: "actions", sortable: false },
       ],
       };
+    },
+
+    computed: {
+      filteredTasks() {
+        return this.tasks
+          .filter((task) => {
+            // Filtrar por estado si está seleccionado
+            if (this.filterStatus !== null) {
+              return task.estado === this.filterStatus;
+            }
+            return true;
+          })
+          .filter((task) => {
+            // Filtrar por palabra clave en título o descripción
+            const keyword = this.search.toLowerCase();
+            return (
+              task.titulo.toLowerCase().includes(keyword) ||
+              task.descripcion.toLowerCase().includes(keyword)
+            );
+          });
+      },
     },
 
     mounted() {
