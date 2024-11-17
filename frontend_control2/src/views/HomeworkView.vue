@@ -1,5 +1,4 @@
 <template>
-  
   <v-container class="homework-container" fluid>
     <v-row justify="center">
       <v-card class="text-center pa-6" elevation="8" max-width="400">
@@ -30,12 +29,15 @@
           :headers="headers"
           :items="filteredTasks"
           class="elevation-1"
-          item-value="id"
+          item-value="id_tarea"
           dense
           search="search"
         >
           <template v-slot:[`item.actions`]="{ item }">
-            <v-chip :color="item.estado ? 'green' : 'orange'" text-color="white">
+            <v-chip
+              :color="item.estado ? 'green' : 'orange'"
+              text-color="white"
+            >
               {{ item.estado ? "Completada" : "Pendiente" }}
             </v-chip>
             <!-- Botón para editar la tarea -->
@@ -44,28 +46,28 @@
             </v-btn>
           </template>
         </v-data-table>
-
       </v-card>
-
     </v-row>
   </v-container>
 </template>
 
 <script>
-  import taskService from '@/services/task.service';
-  export default {
-    name: "HomeworkView",
+import taskService from "@/services/task.service";
+import { jwtDecode } from "jwt-decode";
+export default {
+  name: "HomeworkView",
 
-    data() {
-      return {
-        tasks: [], // Lista de tareas obtenidas del servicio
-        search: "", // Palabra clave para buscar
-        filterStatus: null, // Filtro de estado: 'pendiente' o 'completada'
-        statusOptions: [
-          { text: "Pendiente", value: false },
-          { text: "Completada", value: true },
-        ],
-        headers: [
+  data() {
+    return {
+      user: "",
+      tasks: [], // Lista de tareas obtenidas del servicio
+      search: "", // Palabra clave para buscar
+      filterStatus: null, // Filtro de estado: 'pendiente' o 'completada'
+      statusOptions: [
+        { text: "Pendiente", value: false },
+        { text: "Completada", value: true },
+      ],
+      headers: [
         { text: "Título", value: "titulo" },
         { text: "Descripción", value: "descripcion" },
         { text: "Fecha Creación", value: "fecha_creacion" },
@@ -74,43 +76,52 @@
         //esto es para mostrar los botones
         { text: "Acciones", value: "actions", sortable: false },
       ],
-      };
-    },
+    };
+  },
 
-    computed: {
-      filteredTasks() {
-        return this.tasks
-          .filter((task) => {
-            // Filtrar por estado si está seleccionado
-            if (this.filterStatus !== null) {
-              return task.estado === this.filterStatus;
-            }
-            return true;
-          })
-          .filter((task) => {
-            // Filtrar por palabra clave en título o descripción
-            const keyword = this.search.toLowerCase();
-            return (
-              task.titulo.toLowerCase().includes(keyword) ||
-              task.descripcion.toLowerCase().includes(keyword)
-            );
-          });
-      },
-    },
-
-    mounted() {
-    // Obtiene todas las tareas al montar el componente
-      taskService
-        .getAll()
-        .then((response) => {
-          this.tasks = response.data; // Ajusta esto según el formato de datos que retorna tu servicio
+  computed: {
+    filteredTasks() {
+      return this.tasks
+        .filter((task) => {
+          // Filtrar por estado si está seleccionado
+          if (this.filterStatus !== null) {
+            return task.estado === this.filterStatus;
+          }
+          return true;
         })
-        .catch((error) => {
-          console.error("Error al obtener las tareas:", error);
+        .filter((task) => {
+          // Filtrar por palabra clave en título o descripción
+          const keyword = this.search.toLowerCase();
+          return (
+            task.titulo.toLowerCase().includes(keyword) ||
+            task.descripcion.toLowerCase().includes(keyword)
+          );
         });
     },
+  },
 
-    methods: {
+  mounted() {
+    // Obtiene todas las tareas al montar el componente
+    taskService
+      .getAll()
+      .then((response) => {
+        this.tasks = response.data; // Ajusta esto según el formato de datos que retorna tu servicio
+        console.log(this.tasks);
+      })
+      .catch((error) => {
+        console.error("Error al obtener las tareas:", error);
+      });
+    
+
+
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      this.user = decodedToken;
+    }
+  },
+
+  methods: {
     addTask() {
       console.log("Agregar nueva tarea");
       this.$router.push({ path: "/addeditwork" });
@@ -118,7 +129,7 @@
     },
     editTask(task) {
       console.log("Editar tarea:", task);
-      this.$router.push({ path: "/addeditwork", query: { id: task.id } });
+      this.$router.push({ path: "/addeditwork", query: { id: task.id_tarea } });
       // Aquí puedes agregar lógica para editar la tarea.
     },
   },
@@ -126,13 +137,13 @@
 </script>
 
 <style scoped>
-  .homework-container {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    background-image: url('../assets/fondoListaTarea.jpg');
-    background-size: cover;
-    background-position: center; 
-    background-repeat: no-repeat;
-  }
+.homework-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-image: url("../assets/fondoListaTarea.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 </style>

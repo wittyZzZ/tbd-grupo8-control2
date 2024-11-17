@@ -1,7 +1,7 @@
 import httpClient from "../http-common"
 
 const getAll = () =>{
-    return httpClient.get('/api/cliente/')
+    return httpClient.get('/api/tareas/')
 };
 const getById = (id) => {
     return httpClient.get(`/api/tareas/${id}`);

@@ -26,15 +26,23 @@ export default {
       mostrarNavbar: true,
     };
   },
+  watch: {
+    $route(to) {
+      this.mostrarNavbar = !["Login", "Register"].includes(to.name);
+    },
+  },
+  mounted() {
+    this.mostrarNavbar = !["Login", "Register"].includes(this.$route.name);
+  },
 
   methods: {
     toggleMenuDrawer() {
       this.menuDrawer = !this.menuDrawer;
     },
+    logout() {
+      localStorage.removeItem("token");
+      this.$router.push({ name: "Login" });
+    },
   },
-
-
-
-
 };
 </script>
