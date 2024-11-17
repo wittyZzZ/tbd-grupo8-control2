@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tareas")
+@RequestMapping("/api/tareas")
 public class TareaController {
 
     @Autowired
@@ -60,11 +60,5 @@ public class TareaController {
     @GetMapping("/usuario/{id_usuario}")
     public List<Tarea> getTareasByUsuario(@PathVariable Long id_usuario) {
         return tareaService.getTareasByUsuario(id_usuario);
-    }
-
-    // Calcular el tiempo restante de una tarea
-    @GetMapping("/{id}/tiempo_restante")
-    public int getTiempoRestante(@PathVariable Long id) {
-        return tareaService.getTiempoRestante(id);
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -100,13 +101,15 @@ public class TareaRepository {
         }
     }
 
-    public int getTiempoRestante(Long id) {
-        String sql = "SELECT (fecha_termino - CURRENT_DATE) AS tiempo_restante FROM tarea WHERE id_tarea = ?";
+    public List<Tarea> getTareasCaducadasByUsername(LocalDateTime ahora, String username) {
+        String sql = "SELECT t.* FROM tarea t " +
+                "JOIN usuario u ON t.id_usuario = u.id_usuario " +
+                "WHERE t.fecha_termino < ? AND t.estado = false AND u.username = ?";
         try {
-            return jdbcTemplate.queryForObject(sql, Integer.class, id);
+            return jdbcTemplate.query(sql, tareaRowMapper, ahora, username);
         } catch (DataAccessException e) {
-            System.out.println("Error al obtener tiempo restante de tarea con id " + id + ": " + e.getMessage());
-            return 0;
+            System.out.println("Error al obtener tareas caducadas para el usuario " + username + ": " + e.getMessage());
+            return null;
         }
     }
 

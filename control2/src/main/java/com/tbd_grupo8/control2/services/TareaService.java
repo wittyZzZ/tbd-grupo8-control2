@@ -5,6 +5,7 @@ import com.tbd_grupo8.control2.repositories.TareaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -48,8 +49,9 @@ public class TareaService {
         return tareaRepository.getTareasByUsuario(id_usuario);
     }
 
-    // Calcular el tiempo restante de una tarea
-    public int getTiempoRestante(Long id) {
-        return tareaRepository.getTiempoRestante(id);
+    // Mediante un Scheduler envia a un websocket las tareas caducadas del usuario logeado
+    public List<Tarea> getTareasCaducadasByUsername(String username) {
+        LocalDateTime ahora = LocalDateTime.now();
+        return tareaRepository.getTareasCaducadasByUsername(ahora, username);
     }
 }
