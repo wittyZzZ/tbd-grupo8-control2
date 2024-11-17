@@ -2,26 +2,26 @@
 
 INSERT INTO USUARIO (id_usuario, username, direccion, email, contrasena, telefono)
 VALUES
-(1, 'user_1', 'Street 1, City 4', 'user1@example.com', 'password1', '+56935303864'),
-(2, 'user_2', 'Street 2, City 5', 'user2@example.com', 'password2', '+56922531069'),
-(3, 'user_3', 'Street 3, City 5', 'user3@example.com', 'password3', '+56913446058'),
-(4, 'user_4', 'Street 4, City 3', 'user4@example.com', 'password4', '+56942749550'),
-(5, 'user_5', 'Street 5, City 6', 'user5@example.com', 'password5', '+56985843537'),
-(6, 'user_6', 'Street 6, City 3', 'user6@example.com', 'password6', '+56916010600'),
-(7, 'user_7', 'Street 7, City 8', 'user7@example.com', 'password7', '+56945672230'),
-(8, 'user_8', 'Street 8, City 7', 'user8@example.com', 'password8', '+56915422477'),
-(9, 'user_9', 'Street 9, City 8', 'user9@example.com', 'password9', '+56969754723'),
-(10, 'user_10', 'Street 10, City 3', 'user10@example.com', 'password10', '+56975219943'),
-(11, 'user_11', 'Street 11, City 2', 'user11@example.com', 'password11', '+56952681740'),
-(12, 'user_12', 'Street 12, City 4', 'user12@example.com', 'password12', '+56926153006'),
-(13, 'user_13', 'Street 13, City 10', 'user13@example.com', 'password13', '+56915495386'),
-(14, 'user_14', 'Street 14, City 3', 'user14@example.com', 'password14', '+56974282011'),
-(15, 'user_15', 'Street 15, City 1', 'user15@example.com', 'password15', '+56981776810'),
-(16, 'user_16', 'Street 16, City 8', 'user16@example.com', 'password16', '+56994174036'),
-(17, 'user_17', 'Street 17, City 10', 'user17@example.com', 'password17', '+56926806878'),
-(18, 'user_18', 'Street 18, City 10', 'user18@example.com', 'password18', '+56967100641'),
-(19, 'user_19', 'Street 19, City 6', 'user19@example.com', 'password19', '+56932870016'),
-(20, 'user_20', 'Street 20, City 2', 'user20@example.com', 'password20', '+56910191446');
+(1, 'user_1', 'Street 1, City 4', 'user1@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56935303864'),
+(2, 'user_2', 'Street 2, City 5', 'user2@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56922531069'),
+(3, 'user_3', 'Street 3, City 5', 'user3@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56913446058'),
+(4, 'user_4', 'Street 4, City 3', 'user4@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56942749550'),
+(5, 'user_5', 'Street 5, City 6', 'user5@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56985843537'),
+(6, 'user_6', 'Street 6, City 3', 'user6@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56916010600'),
+(7, 'user_7', 'Street 7, City 8', 'user7@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56945672230'),
+(8, 'user_8', 'Street 8, City 7', 'user8@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56915422477'),
+(9, 'user_9', 'Street 9, City 8', 'user9@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56969754723'),
+(10, 'user_10', 'Street 10, City 3', 'user10@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56975219943'),
+(11, 'user_11', 'Street 11, City 2', 'user11@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56952681740'),
+(12, 'user_12', 'Street 12, City 4', 'user12@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56926153006'),
+(13, 'user_13', 'Street 13, City 10', 'user13@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56915495386'),
+(14, 'user_14', 'Street 14, City 3', 'user14@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56974282011'),
+(15, 'user_15', 'Street 15, City 1', 'user15@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56981776810'),
+(16, 'user_16', 'Street 16, City 8', 'user16@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56994174036'),
+(17, 'user_17', 'Street 17, City 10', 'user17@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56926806878'),
+(18, 'user_18', 'Street 18, City 10', 'user18@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56967100641'),
+(19, 'user_19', 'Street 19, City 6', 'user19@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56932870016'),
+(20, 'user_20', 'Street 20, City 2', 'user20@example.com', '$2a$10$oPaHQ9If2AreZLvYLy1Q3.s0Z1eOngyOdB720x81ooKYRIgmWnB1.', '+56910191446');
 
 INSERT INTO TAREA (id_tarea, titulo, descripcion, fecha_creacion, fecha_termino, estado, id_usuario)
 VALUES
