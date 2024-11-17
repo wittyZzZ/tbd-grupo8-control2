@@ -40,7 +40,7 @@ public class TareaService {
     }
 
     // Obtener tareas por estado (pendiente o completada)
-    public List<Tarea> getTareasByEstado(Boolean estado) {
+    public List<Tarea> getTareasByEstado(String estado) {
         return tareaRepository.getTareasByEstado(estado);
     }
 
