@@ -81,6 +81,7 @@ export default {
         },
         isEditing: false, // Determina si estamos editando o creando
         loading: false,
+        userId: null,
       };
     },
   
@@ -91,7 +92,7 @@ export default {
       this.userID = decodedToken.id_usuario;
       console.log(this.user);
     } else {
-      console.log("NO HAY TOKENXD");
+      console.log("No hay token");
     }
 
     const tareaId = this.$route.query.id; // Obtenemos el ID de la tarea (si existe)
