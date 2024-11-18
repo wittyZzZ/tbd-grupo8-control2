@@ -102,12 +102,14 @@ export default {
     applyFilters() {
       this.filteredTasks = this.tasks
         .filter((task) => {
-          if (this.filterStatus !== null) {
-            return task.estado === this.filterStatus;
+          // Si el estado es "Todas", no filtrar por estado
+          if (this.filterStatus === "Todas" || this.filterStatus === null) {
+            return true;
           }
-          return true;
+          return task.estado === this.filterStatus;
         })
         .filter((task) => {
+          // Filtrar por palabra clave en título o descripción
           const keyword = this.search.toLowerCase();
           return (
             task.titulo.toLowerCase().includes(keyword) ||
@@ -115,6 +117,7 @@ export default {
           );
         });
     },
+
   },
 
   mounted() {
@@ -142,9 +145,23 @@ export default {
     editTask(task) {
       this.$router.push({ path: "/addeditwork", query: { id: task.id_tarea } });
     },
+
+
     deleteTask(task) {
-      console.log("Eliminar tarea:", task);
+      if (confirm("¿Estás seguro de que deseas eliminar esta tarea?")) {
+        taskService
+          .remove(task.id_tarea)
+          .then(() => {
+            alert("Tarea eliminada con éxito.");
+            this.$router.go(); // Redirigir a la lista de tareas
+          })
+          .catch((error) => {
+            console.error("Error al eliminar la tarea:", error);
+            this.loading = false;
+          });
+      }
     },
+
   },
 };
 </script>

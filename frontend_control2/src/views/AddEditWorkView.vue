@@ -42,12 +42,12 @@
           ></v-text-field>
 
           <!-- Campo Estado -->
-          <v-switch
+          <v-select
             v-model="tarea.estado"
-            label="Estado"
-            false-value="false"
-            true-value="true"
-          ></v-switch>
+            :items="['Caducada', 'Completada', 'Pendiente']"
+            label="Estado de la Tarea"
+            outlined
+          ></v-select>
 
           <v-btn
             color="primary"
@@ -66,16 +66,18 @@
 
 <script>
 import taskService from '@/services/task.service';
+import { jwtDecode } from 'jwt-decode';
 export default {
     name: "AddEditWorkView",
     data() {
       return {
+        userID: null,
         tarea: {
           titulo: "",
           descripcion: "",
           fecha_creacion: "",
           fecha_termino: "",
-          estado: false,
+          estado: "",
         },
         isEditing: false, // Determina si estamos editando o creando
         loading: false,
@@ -83,6 +85,15 @@ export default {
     },
   
   mounted() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      this.userID = decodedToken.id_usuario;
+      console.log(this.user);
+    } else {
+      console.log("NO HAY TOKENXD");
+    }
+
     const tareaId = this.$route.query.id; // Obtenemos el ID de la tarea (si existe)
     if (tareaId) {
       this.isEditing = true;
@@ -122,8 +133,10 @@ export default {
             });
         } else {
           // Crear tarea
+          const newTask = {...this.tarea,
+            id_usuario: this.userID};
           taskService
-            .create(this.tarea)
+            .create(newTask)
             .then(() => {
               this.$router.push({ path: '/homeworks' }); // Redirigir a la lista de tareas
             })

@@ -29,7 +29,7 @@ public class TareaController {
     }
 
     // Crear una nueva tarea
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<Void> createTarea(@RequestBody Tarea tarea) {
         int result = tareaService.createTarea(tarea);
         return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
