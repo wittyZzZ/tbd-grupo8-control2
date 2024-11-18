@@ -52,7 +52,7 @@ public class TareaController {
 
     // Obtener tareas por estado
     @GetMapping("/estado/{estado}")
-    public List<Tarea> getTareasByEstado(@PathVariable Boolean estado) {
+    public List<Tarea> getTareasByEstado(@PathVariable String estado) {
         return tareaService.getTareasByEstado(estado);
     }
 

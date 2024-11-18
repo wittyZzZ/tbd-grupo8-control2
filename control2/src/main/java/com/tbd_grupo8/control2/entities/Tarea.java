@@ -15,6 +15,6 @@ public class Tarea {
     private String descripcion;
     private Date fecha_creacion;
     private Date fecha_termino;
-    private Boolean estado;
+    private String estado;
     private Long id_usuario;
 }

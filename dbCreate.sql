@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS TAREA
     descripcion varchar(255),
     fecha_creacion DATE,
     fecha_termino DATE,
-    estado boolean,
+    estado varchar(100),
     id_usuario integer,
     foreign key (id_usuario) references USUARIO(id_usuario)
 );

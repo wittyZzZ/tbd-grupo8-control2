@@ -24,7 +24,7 @@ public class TareaRepository {
         tarea.setDescripcion(rs.getString("descripcion"));
         tarea.setFecha_creacion(rs.getDate("fecha_creacion"));
         tarea.setFecha_termino(rs.getDate("fecha_termino"));
-        tarea.setEstado(rs.getBoolean("estado"));
+        tarea.setEstado(rs.getString("estado"));
         tarea.setId_usuario(rs.getLong("id_usuario"));
         return tarea;
     };
@@ -91,7 +91,7 @@ public class TareaRepository {
         }
     }
 
-    public List<Tarea> getTareasByEstado(Boolean estado) {
+    public List<Tarea> getTareasByEstado(String estado) {
         String sql = "SELECT * FROM tarea WHERE estado = ?";
         try {
             return jdbcTemplate.query(sql, tareaRowMapper, estado);
@@ -104,7 +104,7 @@ public class TareaRepository {
     public List<Tarea> getTareasCaducadasByUsername(LocalDateTime ahora, String username) {
         String sql = "SELECT t.* FROM tarea t " +
                 "JOIN usuario u ON t.id_usuario = u.id_usuario " +
-                "WHERE t.fecha_termino < ? AND t.estado = false AND u.username = ?";
+                "WHERE t.fecha_termino < ? AND t.estado = 'Caducada' AND u.username = ?";
         try {
             return jdbcTemplate.query(sql, tareaRowMapper, ahora, username);
         } catch (DataAccessException e) {
