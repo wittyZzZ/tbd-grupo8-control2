@@ -31,7 +31,6 @@ public class SecurityConfig {
             .cors((cors) -> {}) // Habilita CORS
             .authorizeHttpRequests(authorize -> authorize // Configura las rutas que requieren autenticación
                 .requestMatchers("/auth/**").permitAll() // Todos pueden acceder a /auth/**
-                .requestMatchers("/api/**").permitAll() // Todos pueden acceder a /api/*
                 .requestMatchers("/ws/**").permitAll() //Permitir websocket
                 .anyRequest().authenticated() // Todas las demás rutas requieren autenticación
             )
