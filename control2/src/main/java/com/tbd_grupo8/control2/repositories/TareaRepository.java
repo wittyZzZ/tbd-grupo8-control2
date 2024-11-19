@@ -101,14 +101,12 @@ public class TareaRepository {
         }
     }
 
-    public List<Tarea> getTareasCaducadasByUsername(LocalDateTime ahora, String username) {
-        String sql = "SELECT t.* FROM tarea t " +
-                "JOIN usuario u ON t.id_usuario = u.id_usuario " +
-                "WHERE t.fecha_termino < ? AND t.estado = 'Caducada' AND u.username = ?";
+    public List<Tarea> getTareasCaducadasByUsername(Long id_usuario) {
+        String sql = "SELECT * FROM tarea WHERE estado = 'Caducada' AND id_usuario = ?";
         try {
-            return jdbcTemplate.query(sql, tareaRowMapper, ahora, username);
+            return jdbcTemplate.query(sql, tareaRowMapper,id_usuario);
         } catch (DataAccessException e) {
-            System.out.println("Error al obtener tareas caducadas para el usuario " + username + ": " + e.getMessage());
+            System.out.println("Error al obtener tareas caducadas para el usuario " + id_usuario + ": " + e.getMessage());
             return null;
         }
     }

@@ -51,12 +51,4 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     } // Configura el encriptador de contraseñas
 
-    public String obtenerUsuarioAutenticado() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails) {
-            return ((UserDetails) principal).getUsername();
-        } else {
-            return principal.toString();
-        }
-    }
 }

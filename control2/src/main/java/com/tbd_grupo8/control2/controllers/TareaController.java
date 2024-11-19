@@ -56,9 +56,15 @@ public class TareaController {
         return tareaService.getTareasByEstado(estado);
     }
 
+    @GetMapping("/caducada/{id_usuario}")
+    public List<Tarea> getTareasCaducadas(@PathVariable Long id_usuario) {
+        return tareaService.getTareasCaducadasByUsername(id_usuario);
+    }
+
     // Obtener tareas de un usuario
     @GetMapping("/usuario/{id_usuario}")
-    public List<Tarea> getTareasByUsuario(@PathVariable Long id_usuario) {
-        return tareaService.getTareasByUsuario(id_usuario);
+    public ResponseEntity<List<Tarea>> getTareasByUsuario(@PathVariable Long id_usuario) {
+        List<Tarea> tareasCaducadas = tareaService.getTareasByUsuario(id_usuario);
+        return tareasCaducadas != null ? ResponseEntity.ok(tareasCaducadas) : ResponseEntity.notFound().build();
     }
 }

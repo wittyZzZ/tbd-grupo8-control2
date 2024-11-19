@@ -3,7 +3,7 @@ module.exports = defineConfig({
   transpileDependencies: true,
 
   devServer: {
-    port: 5173 // Cambia 3000 por el puerto que prefieras
+    port: 5173
   },
 
   pluginOptions: {

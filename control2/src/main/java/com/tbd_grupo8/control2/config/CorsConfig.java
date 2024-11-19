@@ -23,8 +23,6 @@ public class CorsConfig {
         // Permitir todos los headers en las solicitudes
         corsConfiguration.setAllowedHeaders(Arrays.asList("*"));
 
-        // Permite credenciales para el websocket
-        corsConfiguration.setAllowCredentials(true);
 
 //        // Exponer el header Authorization para que esté accesible en el frontend
 //        corsConfiguration.setExposedHeaders(Arrays.asList("Authorization"));

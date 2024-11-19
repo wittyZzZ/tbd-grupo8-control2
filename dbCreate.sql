@@ -32,4 +32,24 @@ CREATE TABLE IF NOT EXISTS TAREA
     foreign key (id_usuario) references USUARIO(id_usuario)
 );
 
+-- Crear funcion para un trigger
+CREATE OR REPLACE FUNCTION cambiar_tarea_caducada()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Comprobar si la fecha_termino es menor a la fecha actual
+    IF NEW.fecha_termino < CURRENT_DATE THEN
+        -- Cambiar el estado a 'Caducada'
+        NEW.estado := 'Caducada';
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Crear un trigger que pondrá la tarea en caducada
+CREATE TRIGGER trigger_cambiar_tarea_caducada
+BEFORE INSERT OR UPDATE OF fecha_termino
+ON TAREA
+FOR EACH ROW
+EXECUTE FUNCTION cambiar_tarea_caducada();
 END;

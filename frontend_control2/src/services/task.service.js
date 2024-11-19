@@ -7,9 +7,6 @@ const getById = (id) => {
     return httpClient.get(`/api/tareas/${id}`);
 };
 
-const getByUserId = (id_usuario) => {
-  return httpClient.get(`/api/tareas/usuario/${id_usuario}`);
-};
 const create = (task) => {
     return httpClient.post('/api/tareas/', task);
 };
@@ -25,13 +22,17 @@ const remove = (id) => {
 const getTasksByUserId = (id_usuario) =>{
   return httpClient.get(`/api/tareas/usuario/${id_usuario}`);
 };
+
+const getTasksExpiredUser = (id_usuario) =>{
+  return httpClient.get(`/api/tareas/caducada/${id_usuario}`);
+};
   
 export default {
   getAll,
   getById,
-  getByUserId,
   create,
   update,
   remove,
   getTasksByUserId,
+  getTasksExpiredUser
 };

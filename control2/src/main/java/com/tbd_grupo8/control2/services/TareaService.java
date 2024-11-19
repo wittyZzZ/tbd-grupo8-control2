@@ -49,9 +49,6 @@ public class TareaService {
         return tareaRepository.getTareasByUsuario(id_usuario);
     }
 
-    // Mediante un Scheduler envia a un websocket las tareas caducadas del usuario logeado
-    public List<Tarea> getTareasCaducadasByUsername(String username) {
-        LocalDateTime ahora = LocalDateTime.now();
-        return tareaRepository.getTareasCaducadasByUsername(ahora, username);
-    }
+    // Obtiene las tareas caducadas
+    public List<Tarea> getTareasCaducadasByUsername(Long id_usuario) { return tareaRepository.getTareasCaducadasByUsername( id_usuario); }
 }
