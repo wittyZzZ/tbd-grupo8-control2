@@ -82,7 +82,10 @@ git clone https://github.com/wittyZzZ/tbd-grupo8-control2
         * Usuario: user_13; Contraseña: 123
         * Usuario: user_7; Contraseña: 123
         * Usuario: user_11; Contraseña: 123
-
+     
+9. Cosas a tener en cuenta
+    * En el backend, en el archivo application.properties, en la linea "spring.datasource.password=123", se debe poner la reemplazar la clave del usuario de la base de datos postgres del dispositivo.
+   
 **¡Listo! Ahora se deberían poder probar las todas las funcionalidades implementadas dentro de la aplicación web.**
        
 
