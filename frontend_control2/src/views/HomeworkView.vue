@@ -40,7 +40,7 @@
       <div class="table-container mr-5">
         <v-data-table
           :headers="headers"
-          :items="filteredTasks.length > 0 ? filteredTasks : tasks"
+          :items="filteredTasks ? filteredTasks : tasks"
           class="elevation-1"
           item-value="id_tarea"
           dense
