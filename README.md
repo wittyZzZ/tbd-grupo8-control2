@@ -1,6 +1,10 @@
 # Control N°2 - Base de Datos Avanzadas
 Este repositorio contiene todos los archivos relacionados con el Control N°2 del ramo Base de Datos Avanzadas desarrollado por el equipo 8.
 
+El sistema implementado para este Control N°2 consiste en una aplicación web de gestión de tareas que permite a los usuarios registrados crear, editar, eliminar
+y realizar un seguimiento de sus tareas pendientes. La aplicación consta de una interfaz de usuario desarrollada en Vue.js para el frontend y una API RESTful desarrollada en
+Spring para el backend.
+
 ## Integrantes del equipo 8
 * Gonzalo Arévalo
 * Arina Bilan
