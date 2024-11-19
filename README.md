@@ -75,7 +75,7 @@ git clone https://github.com/wittyZzZ/tbd-grupo8-control2
     * Estando en http://localhost:5173/login, para iniciar sesión se puede hacer el registro de un nuevo usuario o se puede usar cualquiera de las siguientes cuentas ya existentes:
       
         * Usuario: user_19; Contraseña: 123
-        * Usuario: user_3; Contraseña: 123
+        * Usuario: user_13; Contraseña: 123
         * Usuario: user_7; Contraseña: 123
         * Usuario: user_11; Contraseña: 123
 
