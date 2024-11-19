@@ -82,11 +82,15 @@ export default {
       const decodedToken = jwtDecode(token);
       this.user = decodedToken;
       this.obtenerTareasCaducadas();
-
-      this.interval = setInterval(() => {
-      this.obtenerTareasCaducadas();
-    }, 6000); // Cada 6 segundos
     }
+    this.interval = setInterval(() => {
+      const token = localStorage.getItem("token");
+      if(token){
+        const decodedToken = jwtDecode(token);
+        this.user = decodedToken;
+        this.obtenerTareasCaducadas();
+      }
+    }, 6000); // Cada 6 segundos
   },
 
 
